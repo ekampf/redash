@@ -58,11 +58,16 @@ class HMACAuthentication(object):
         return decorated
 
 
-def validate_email(email):
-    if not settings.GOOGLE_APPS_DOMAIN:
-        return True
+def validate_email(email):    
+    if not settings.GOOGLE_APPS_DOMAIN:        
+        return True        
 
-    return email in settings.ALLOWED_EXTERNAL_USERS or email.endswith("@%s" % settings.GOOGLE_APPS_DOMAIN)
+    valid = email in settings.ALLOWED_EXTERNAL_USERS or email.endswith("@%s" % settings.GOOGLE_APPS_DOMAIN)
+    
+    if valid and settings.WHITELIST_EMAIL_ADDRESSES.size:
+        valid = (email in settings.WHITELIST_EMAIL_ADDRESSES) or (email in settings.ADMINS)
+
+    return valid
 
 
 def create_and_login_user(app, user):

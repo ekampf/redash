@@ -58,6 +58,8 @@ DATABASE_CONFIG = parse_db_url(os.environ.get("REDASH_DATABASE_URL", "postgresql
 GOOGLE_APPS_DOMAIN = os.environ.get("REDASH_GOOGLE_APPS_DOMAIN", "")
 GOOGLE_OPENID_ENABLED = parse_boolean(os.environ.get("REDASH_GOOGLE_OPENID_ENABLED", "true"))
 PASSWORD_LOGIN_ENABLED = parse_boolean(os.environ.get("REDASH_PASSWORD_LOGIN_ENABLED", "false"))
+WHITELIST_EMAIL_ADDRESSES = array_from_string(os.environ.get("REDASH_WHITELIST_EMAIL_ADDRESSES", ''))
+
 # Email addresses of admin users (comma separated)
 ADMINS = array_from_string(os.environ.get("REDASH_ADMINS", ''))
 ALLOWED_EXTERNAL_USERS = array_from_string(os.environ.get("REDASH_ALLOWED_EXTERNAL_USERS", ''))
